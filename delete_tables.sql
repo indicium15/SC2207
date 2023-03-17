@@ -1,0 +1,13 @@
+DROP TABLE dbo.books
+DROP TABLE dbo.complaints
+DROP TABLE dbo.complaints_on_books
+DROP TABLE dbo.complaints_on_orders
+DROP TABLE dbo.customers
+DROP TABLE dbo.employees
+DROP TABLE dbo.items_in_orders
+DROP TABLE dbo.magazines
+DROP TABLE dbo.orders
+DROP TABLE dbo.orderstatus
+DROP TABLE dbo.price_history
+DROP TABLE dbo.publication
+DROP TABLE dbo.stocks_in_bookstores

@@ -62,7 +62,7 @@ CREATE TABLE price_history(
 );
 
 CREATE TABLE items_in_orders(
-    itemid INT PRIMARY KEY,
+    itemid INT,
     item_price FLOAT NOT NULL,
     item_qty INT NOT NULL,
     delivery_date DATETIME NOT NULL,
@@ -72,6 +72,7 @@ CREATE TABLE items_in_orders(
     comment VARCHAR(100) NOT NULL,
     feedback_date_time DATETIME NOT NULL,
     rating FLOAT NOT NULL,
+    PRIMARY KEY(itemid),
 );
 
 CREATE TABLE orderstatus(
