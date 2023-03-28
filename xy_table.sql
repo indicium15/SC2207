@@ -146,13 +146,10 @@ CREATE TABLE price_history(
 );
 INSERT INTO price_history (stockid, price, start_date, end_date)
 VALUES 
-
-    #to get average for price of HPF on Amahzon
+    -- #to get average for price of HPF on Amahzon
     ('s1', 14, '2022-08-01', '2022-08-31'),
     ('s5', 17, '2022-08-01', '2022-08-31'),
     ('s14', 20, '2022-08-01', '2022-08-31');
-   
-
 
 CREATE TABLE items_in_orders_1(
     itemid VARCHAR(50),
@@ -167,21 +164,27 @@ CREATE TABLE items_in_orders_1(
 );
 INSERT INTO items_in_orders_1(itemid, item_price, item_qty, orderid, delivery_date, stockid)
 VALUES
-
-    #workinprogress
-    ('i1', NULL, 3, 'o11', '2022-06-10', 's3' )
-    ('i2', NULL, 1, 'o12', '2022-06-13', 's5')
-    ('i3', NULL, 2, 'o13','2022-06-15', 's')
-
+    -- #workinprogress
+    ('i1', 5.50, 3, 'o11', '2022-06-10', 's3'),
+    ('i2', 12.50, 1, 'o12', '2022-06-13', 's5'),
+    ('i3', 23.50, 2, 'o13','2022-06-15', 's'),
+    ('i4', 2.50, 3, 'o14','2022-12-01','s1');
 
 CREATE TABLE items_in_orders_2(
     itemid VARCHAR(50),
-    comment TEXT,
+    comment VARCHAR(100),
     rating FLOAT,
     feedback_date_time DATETIME,
     FOREIGN KEY(itemid) REFERENCES items_in_orders_1(itemid),
     PRIMARY KEY(itemid)
 );
+INSERT INTO items_in_orders_2(itemid, comment, rating, feedback_date_time)
+VALUES
+    ('i1','Very nice item',5.0,'2023-01-01'),
+    ('i1','Great purchase',5.0,'2023-01-02'),
+    ('i2','Slightly good item',4.0,'2023-02-02'),
+    ('i3','Decent Item',3.0, '2022-15-12'),
+    ('i3','Very Bad Item',2.0,'2022-01-01');
 
 CREATE TABLE items_in_orders_3(
     orderid VARCHAR(50),
@@ -193,6 +196,10 @@ CREATE TABLE items_in_orders_3(
     PRIMARY KEY(orderid,stockid)
 );
 
+INSERT INTO items_in_orders_3(orderid, stockid, itemid)
+VALUES
+    (NULL,NULL,NULL,NULL);
+
 CREATE TABLE items_in_orders_4(
     orderid VARCHAR(50),
     cid VARCHAR(50),
@@ -200,6 +207,12 @@ CREATE TABLE items_in_orders_4(
     FOREIGN KEY(cid) REFERENCES customers(cid),
     PRIMARY KEY(orderid)
 );
+INSERT INTO items_in_orders_4(orderid, cid)
+VALUES
+    ('o11','c1'),
+    ('o12','c2'),
+    ('o13','c1'),
+    ('o14','c4');
 
 CREATE TABLE orderstatus(
     itemid VARCHAR(50),
@@ -209,6 +222,10 @@ CREATE TABLE orderstatus(
     PRIMARY KEY(itemid, status_date)
 );
 
+INSERT INTO orderstatus(itemid, status_date, state)
+VALUES
+    ('i1','2023-01-01','Delivering'),
+    (NULL,NULL,NULL);
 
 CREATE TABLE complaints(
     complaintsid VARCHAR(50),
@@ -222,6 +239,13 @@ CREATE TABLE complaints(
     PRIMARY KEY(complaintsid)
 );
 
+INSERT INTO complaints(complaintsid, cid, eid)
+VALUES
+    ('complaint1','c1','e1'),
+    ('complaint2','c2','e2'),
+    ('complaint3','c3','e1'),
+    ('complaint4','c4','e2');
+
 CREATE TABLE complaints_on_bookstore(
     complaintsid VARCHAR(50),
     bookstoreid VARCHAR(50),
@@ -229,6 +253,10 @@ CREATE TABLE complaints_on_bookstore(
     FOREIGN KEY(bookstoreid) REFERENCES bookstore(bookstoreid),
     PRIMARY KEY(complaintsid)
 );
+
+INSERT INTO complaints_on_bookstore(complaintsid, bookstoreid)
+VALUES
+    ('complaint1','bs1');
 
 CREATE TABLE complaints_on_orders(
     complaintsid VARCHAR(50),
@@ -238,11 +266,9 @@ CREATE TABLE complaints_on_orders(
     PRIMARY KEY(complaintsid)
 );
 
-
-
-
-
-
+INSERT INTO complaints_on_orders(complaintsid, orderid)
+VALUES
+    ('complaint3','o12');
 
 SELECT * FROM publication;
 SELECT * FROM books;

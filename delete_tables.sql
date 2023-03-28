@@ -12,8 +12,14 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[custo
 DROP TABLE [dbo].[customers]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[employees]') AND type in (N'U'))
 DROP TABLE [dbo].[employees]
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[items_in_orders]') AND type in (N'U'))
-DROP TABLE [dbo].[items_in_orders]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[items_in_orders_1]') AND type in (N'U'))
+DROP TABLE [dbo].[items_in_orders_1]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[items_in_orders_2]') AND type in (N'U'))
+DROP TABLE [dbo].[items_in_orders_2]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[items_in_orders_3]') AND type in (N'U'))
+DROP TABLE [dbo].[items_in_orders_3]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[items_in_orders_4]') AND type in (N'U'))
+DROP TABLE [dbo].[items_in_orders_4]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[magazines]') AND type in (N'U'))
 DROP TABLE [dbo].[magazines]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[orders]') AND type in (N'U'))
