@@ -8,3 +8,7 @@ create table dbo.magazines
 )
 go
 
+INSERT INTO a54g3.dbo.magazines (pubid, title, issue) VALUES (N'PUB10', N'PopClub', 54);
+INSERT INTO a54g3.dbo.magazines (pubid, title, issue) VALUES (N'PUB1004', N'AAA Magazine', 1);
+INSERT INTO a54g3.dbo.magazines (pubid, title, issue) VALUES (N'PUB1005', N'BBB Magazine', 2);
+INSERT INTO a54g3.dbo.magazines (pubid, title, issue) VALUES (N'PUB11', N'EatHub', 24);

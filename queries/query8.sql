@@ -120,28 +120,31 @@ WHERE iio1.delivery_date BETWEEN ph.start_date AND ph.end_date;
 
 
 #8. Find publications that have never been purchased by any customers in July 2022, but are the top 3 most purchased publications in August 2022. 
-SELECT *
-FROM (
-  SELECT p.pubid, p.title, SUM(io1.item_qty) AS total_qty
-  FROM orders o
-  JOIN items_in_orders_3 io3 ON o.orderid = io3.orderid
-  JOIN items_in_orders_1 io1 ON io3.itemid = io1.itemid AND io3.stockid = io1.stockid
-  JOIN stocks_in_bookstores s ON io1.stockid = s.stockid
+WITH top_pubs AS (
+  SELECT TOP 3
+    p.pubid,
+    p.title,
+    SUM(io1.item_qty) AS total_qty
+  FROM dbo.orders AS o
+  JOIN dbo.items_in_orders_3 AS io3 ON o.orderid = io3.orderid
+  JOIN dbo.items_in_orders_1 AS io1 ON io3.itemid = io1.itemid AND io3.stockid = io1.stockid
+  JOIN dbo.stocks_in_bookstores AS s ON io1.stockid = s.stockid
   JOIN (
-    SELECT pubid, title FROM books
+    SELECT pubid, title FROM dbo.books
     UNION ALL
-    SELECT pubid, title FROM magazines
-  ) p ON s.pubid = p.pubid
+    SELECT pubid, title FROM dbo.magazines
+  ) AS p ON s.pubid = p.pubid
   WHERE o.date_time >= '2022-08-01' AND o.date_time < '2022-09-01'
   GROUP BY p.pubid, p.title
   ORDER BY total_qty DESC
-  LIMIT 3
-) AS top_pubs
-WHERE top_pubs.pubid NOT IN (
+)
+SELECT tp.pubid, tp.title, tp.total_qty
+FROM top_pubs AS tp
+WHERE tp.pubid NOT IN (
   SELECT s.pubid
-  FROM orders o
-  JOIN items_in_orders_3 io3 ON o.orderid = io3.orderid
-  JOIN items_in_orders_1 io1 ON io3.itemid = io1.itemid AND io3.stockid = io1.stockid
-  JOIN stocks_in_bookstores s ON io1.stockid = s.stockid
+  FROM dbo.orders AS o
+  JOIN dbo.items_in_orders_3 AS io3 ON o.orderid = io3.orderid
+  JOIN dbo.items_in_orders_1 AS io1 ON io3.itemid = io1.itemid AND io3.stockid = io1.stockid
+  JOIN dbo.stocks_in_bookstores AS s ON io1.stockid = s.stockid
   WHERE o.date_time >= '2022-07-01' AND o.date_time < '2022-08-01'
 );

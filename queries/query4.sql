@@ -1,4 +1,4 @@
-SELECT C.eid, AVG(DATEDIFF(second,C.filled_date_time, C.handled_date_time)) as avg_diff
+SELECT C.eid, AVG(DATEDIFF(hour,C.filled_date_time, C.handled_date_time)) as avg_diff
 from dbo.complaints AS C
 GROUP BY C.eid
 ORDER BY avg_diff ASC

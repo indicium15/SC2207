@@ -34,3 +34,12 @@ INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_
 INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM3', N'Comment24', 5, N'2022-08-23 00:38:42.000');
 INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM3', N'Comment25', 5, N'2022-08-24 00:38:42.000');
 INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM3', N'Comment26', 5, N'2022-08-25 00:38:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1001', null, 3, N'2022-08-02 00:48:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1002', null, 2, N'2022-08-05 00:48:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1003', null, 3, N'2022-08-15 00:48:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1004', null, 2, N'2022-08-17 00:48:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1005', null, 3, N'2022-08-18 00:48:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1006', null, 2, N'2022-08-19 00:48:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1007', null, 5, N'2022-08-20 00:48:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1008', null, 2, N'2022-07-10 00:48:42.000');
+INSERT INTO a54g3.dbo.items_in_orders_2 (itemid, comment, rating, feedback_date_time) VALUES (N'ITEM1009', null, 3, N'2022-07-10 00:48:42.000');

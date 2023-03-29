@@ -113,30 +113,26 @@ VALUES
 
 
 #update all item_prices in iio1, when delivery date is betwn start and end:
-UPDATE items_in_orders_1 AS iio1
-JOIN price_history AS ph ON iio1.stockid = ph.stockid
+UPDATE iio1
 SET iio1.item_price = ph.price
+FROM dbo.items_in_orders_1 AS iio1
+JOIN dbo.price_history AS ph ON iio1.stockid = ph.stockid
 WHERE iio1.delivery_date BETWEEN ph.start_date AND ph.end_date;
-
-
 #6. Find bookstores that made the most revenue in August 2022.
-SELECT
-    sib.bookstoreid,
-    SUM(io.item_price * io.item_qty) AS total_revenue
-FROM items_in_orders_1 io
-JOIN stocks_in_bookstores sib ON io.stockid = sib.stockid
-WHERE MONTH(io.delivery_date) = 8 AND YEAR(io.delivery_date) = 2022
-GROUP BY sib.bookstoreid
-HAVING total_revenue = (
+WITH revenue_by_bookstore AS (
     SELECT
-        MAX(total_revenue)
-    FROM (
-        SELECT
-            sib2.bookstoreid,
-            SUM(io2.item_price * io2.item_qty) AS total_revenue
-        FROM items_in_orders_1 io2
-        JOIN stocks_in_bookstores sib2 ON io2.stockid = sib2.stockid
-        WHERE MONTH(io2.delivery_date) = 8 AND YEAR(io2.delivery_date) = 2022
-        GROUP BY sib2.bookstoreid
-    ) AS inner_query
-);
+        sib.bookstoreid,
+        SUM(io.item_price * io.item_qty) AS total_revenue
+    FROM dbo.items_in_orders_1 AS io
+    JOIN dbo.stocks_in_bookstores AS sib ON io.stockid = sib.stockid
+    WHERE MONTH(io.delivery_date) = 8 AND YEAR(io.delivery_date) = 2022
+    GROUP BY sib.bookstoreid
+)
+SELECT
+    rb.bookstoreid,
+    rb.total_revenue
+FROM revenue_by_bookstore AS rb
+WHERE rb.total_revenue = (
+    SELECT MAX(inner_rb.total_revenue)
+    FROM revenue_by_bookstore AS inner_rb
+)
